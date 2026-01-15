@@ -3,9 +3,6 @@ import idaapi
 import idautils
 import re
 
-# ----------------------------------------------------------------
-# Banner 定義
-# ----------------------------------------------------------------
 banner = """
 ----------------------------------------------------------------
 IDA Stack String Function Renamer
@@ -110,3 +107,4 @@ def solve_all_stack_strings():
 
 if __name__ == "__main__":
     solve_all_stack_strings()
+
