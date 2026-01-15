@@ -3,6 +3,28 @@ import idaapi
 import idautils
 import re
 
+# ----------------------------------------------------------------
+# Banner 定義
+# ----------------------------------------------------------------
+banner = """
+----------------------------------------------------------------
+IDA Stack String Function Renamer
+----------------------------------------------------------------
+This script detects stack-based strings inside functions and uses
+them to rename API wrapper functions automatically.
+
+Example pattern handled by this script:
+
+    strcpy(buf, "memcpy");
+    func = GetProcAddress(hModule, buf);
+    return func(a1, a2, a3);
+
+Instead of leaving the function as sub_xxxx, the script recovers
+the stack string ("memcpy") and renames the function accordingly,
+making static analysis faster and more readable.
+----------------------------------------------------------------
+"""
+
 def get_stack_string_from_func(func_ea):
     stack_chars = {}
     
@@ -47,6 +69,7 @@ def get_stack_string_from_func(func_ea):
     return None
 
 def solve_all_stack_strings():
+    print(banner)
     print("[-] Scanning for Stack Strings...")
     
     count = 0
